@@ -2,109 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color:beige;
+            margin: 0;
+            background-color: beige;
         }
+        
+        /* Header */
+        header {
+            background-color: #1b63a2;
+            color: white;
+            padding: 20px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h2 {
+            margin-left: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 5px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 10px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #4CAF50;
+            text-decoration: underline;
+        }
+
+        /* Main content */
         .container {
-            color: #007BFF;
             max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 30px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
-        img {
-            border-radius: 10px;
-            max-width: 100%;
-            height: auto;
+
+        .content-block {
+            background-color: #f0f8ff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .profile-pic {
-            width: 150px;
-            border-radius: 50%;
-        }
-        ul {
-            line-height: 1.6;
-        }
-        a {
-            color: #007BFF;
-        }
-        h1{
+
+        h1 {
             font-style: italic;
-        }
-        .kw_pics {
-           display: flex;
-           justify-content: center;
-           gap: 20px;
-           margin-top: 20px;
-           margin-bottom: 50px;
-        }
-        .kw_pics img {
-        transition: transform 0.35s ease-in-out;
-        z-index: 1;
-        width:450px;
-        height:300px;
+            opacity: 0; /* Start with hidden */
+            animation: fadeIn 3s forwards; /* Apply fadeIn animation */
         }
 
-.kw_pics img:hover {
-    transform: scale(1.2); /* Zooms in */
-    z-index: 10; /* Brings the hovered image in front */
-}
-.element{
-    text-align: center;
-}
-.hover_text{
-    color:blueviolet;
-    padding-top: 30px;
-    display:none;
-}
-.element:hover .hover_text{
-    display:block;
-}
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0; /* Start with hidden */
+            animation: fadeIn 5s 0.5s forwards; /* Delay this fade-in */
+        }
 
+        /* Footer */
+        footer {
+            background-color: #1b63a2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
 
+        /* Fade-in animation used llm for cool animations*/
+        @keyframes fadeIn {
+            to {
+                opacity: 1; /* Final state after animation */
+            }
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>About Me</h1>
-        <img src="profile.jpg" alt="My Profile Picture" class="profile-pic">
-        <p>
-            Hello! My name is Karthik Sundram, and I was born in Malaysia and raised in the Middle-East for the most of my life. I'm deeply passionate about all sorts of sports and enjoy learning new skills. I'm a fun-loving elder brother. Below are a few snapshots from Kuwait:
+<body data-label="Page_Home">
+
+    <header data-label="Header_Main">
+      <div class="header-container" data-label="Header_Container">
+        <div class="logo" data-label="Logo_Container">
+          <h2 data-label="Logo_Title">My Website</h2>
+        </div>
+        <nav data-label="Nav_Main">
+          <ul data-label="Nav_List">
+            <li><a href="index.html" class="active" data-label="Nav_Home">Home</a></li>
+            <li><a href="base.html" data-label="Nav_About">About</a></li>
+            <li><a href="achievements.html" data-label="Nav_Achievements">Achievements</a></li>
+            <li><a href="input_analysis.html" data-label="Nav_TextAnalyzer">Text Analyzer</a></li>
+            <li><a href="mailto:karthik.uni.2006@gmail.com" data-label="Nav_Contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  
+    <div class="container" data-label="Main_Container">
+      <div class="content-block" data-label="Intro_Block">
+        <h1 data-label="Welcome_Heading">Welcome to My Website</h1>
+        <p class="intro-text" data-label="Intro_Text">
+          Hi, I'm Karthik Sundram. I'm passionate about technology, learning new skills, and exploring the world around me. This website is a place where I share my journey and ideas. Feel free to explore the different sections to get to know more about me.
         </p>
-        <div class="kw_pics">
-        <div class="element">
-        <img src="kw_towers.jpg" alt="Local Picture 1">
-        <a href="https://en.wikipedia.org/wiki/Kuwait_Towers" target="_blank">
-        <div class="hover_text">Kuwait Towers</div>
-        </a>
-        </div>
-        <div class="element">
-        <img src="my_home.webp" alt="Local Picture 2">
-        <a href="https://en.wikipedia.org/wiki/Petronas_Towers" target="_blank">
-        <div class="hover_text">Petronas Twin Towers in Malaysia</div>
-        </a>
-        </div>
-        </div>
-
-        <h2>Education Background</h2>
-        <p>
-            I completed my early education at [School Name], followed by [High School Name]. I pursued my higher studies at [University Name], where I majored in [Your Major]. During my academic journey, I was awarded [mention key awards, scholarships, or achievements].
-        </p>
-
-        <h2>Technical Skills</h2>
-        <ul>
-            <li><strong>Beginner:</strong> Adobe Photoshop, Figma</li>
-            <li><strong>Intermediate:</strong> Python, SQL, HTML/CSS</li>
-            <li><strong>Advanced:</strong> JavaScript, React, Node.js</li>
-        </ul>
-
-        <h2>My CV</h2>
-        <p>You can download my CV <a href="cv.pdf" target="_blank">here</a>.</p>
+      </div>
     </div>
-</body>
-</html>
+  
+    <footer data-label="Footer_Main">
+      <p data-label="Footer_Text">&copy; 2025 Karthik Sundram. All rights reserved.</p>
+    </footer>
+  
+    <script src="analytics.js" data-label="Script_Analytics"></script>
+  </body>
+  </html>

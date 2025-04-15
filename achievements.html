@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: beige;
+        }
+
+        header {
+            background-color: #1b63a2;
+            color: white;
+            padding: 20px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h2 {
+            margin-left: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 5px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 10px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #4CAF50;
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .tab {
+            background-color: #f0f8ff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #d6ebff;
+        }
+
+        .content {
+            display: none;
+            background-color: #ffffff;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background-color: #1b63a2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body data-label="Page_Achievements">
+
+    <header data-label="Header_Main">
+      <div class="header-container" data-label="Header_Container">
+        <div class="logo" data-label="Logo_Container">
+          <h2 data-label="Logo_Title">My Website</h2>
+        </div>
+        <nav data-label="Nav_Main">
+          <ul data-label="Nav_List">
+            <li><a href="index.html" data-label="Nav_Home">Home</a></li>
+            <li><a href="base.html" data-label="Nav_About">About</a></li>
+            <li><a href="mailto:karthik.uni.2006@gmail.com" data-label="Nav_Contact">Contact</a></li>
+            <li><a href="input_analysis.html" data-label="Nav_TextAnalyzer">Text Analyzer</a></li>
+            <li><a href="achievements.html" class="active" data-label="Nav_Achievements">Achievements</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  
+    <div class="container" data-label="Achievements_Container">
+      <h1 data-label="Achievements_Heading">My Achievements</h1>
+  
+      <div class="tab" onclick="showContent('academic')" data-label="Tab_Academic">Academic</div>
+      <div id="academic" class="content" data-label="Content_Academic">
+        <ul>
+          <li data-label="Achievement_SAT">1580 superscore in SAT</li>
+          <li data-label="Achievement_AP">5 in AP Calculus</li>
+          <li data-label="Achievement_CBSE">97% in CBSE Class 12 Board Exams</li>
+          <li data-label="Achievement_Olympiad">Gold medal in National Mathematics Teachers Olympiad</li>
+        </ul>
+      </div>
+  
+      <div class="tab" onclick="showContent('sports')" data-label="Tab_Sports">Sports</div>
+      <div id="sports" class="content" data-label="Content_Sports">
+        <ul>
+          <li data-label="Achievement_Swimming">5 × Gold medals in Swimming (CBSE Clusters 2023)</li>
+          <li data-label="Achievement_IIITH800m">3rd place in 800m at IIITH Sports Day</li>
+        </ul>
+      </div>
+  
+      <div class="tab" onclick="showContent('others')" data-label="Tab_Others">Others</div>
+      <div id="others" class="content" data-label="Content_Others">
+        <ul>
+          <li data-label="Achievement_MUN">Outstanding speaker, Honourable Mentions in online MUNs</li>
+        </ul>
+      </div>
+    </div>
+  
+    <footer data-label="Footer_Main">
+      <p data-label="Footer_Text">&copy; 2025 Karthik Sundram. All rights reserved.</p>
+    </footer>
+  
+    <script>
+      function showContent(id) {
+        const sections = document.querySelectorAll('.content');
+        sections.forEach(section => {
+          if (section.id === id) {
+            section.style.display = section.style.display === 'block' ? 'none' : 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      }
+    </script>
+  
+    <script src="analytics.js" data-label="Script_Analytics"></script>
+  </body>
+  </html>

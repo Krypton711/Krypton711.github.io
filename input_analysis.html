@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Text Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: beige;
+      padding: 0;
+    }
+
+    /* Header / Nav bar */
+    header {
+      background-color: #1b63a2;
+      color: white;
+      padding: 20px;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo h2 {
+      margin-left: 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 5px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 10px;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #4CAF50;
+      text-decoration: underline;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #1b63a2;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #4CAF50;
+    }
+
+    .results {
+      background: #f0f8ff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      margin-top: 20px;
+    }
+
+    .results h2 {
+      margin-top: 30px;
+    }
+
+    .word-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .word-boxes div {
+      background: #e6f7ff;
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <header data-label="Header_Main">
+    <div class="header-container" data-label="Header_Container">
+      <div class="logo" data-label="Logo_Container">
+        <h2 data-label="Logo_Title">My website</h2>
+      </div>
+      <nav data-label="Nav_Main">
+        <ul data-label="Nav_List">
+          <li><a href="index.html" data-label="Nav_Home">Home</a></li>
+          <li><a href="base.html" data-label="Nav_About">About</a></li>
+          <li><a href="achievements.html" data-label="Nav_Achievements">Achievements</a></li>
+          <li><a href="input_analysis.html" class="active" data-label="Nav_TextAnalyzer">Text Analyzer</a></li>
+          <li><a href="mailto:karthik.uni.2006@gmail.com" data-label="Nav_Contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container" data-label="Main_Container">
+    <h1 data-label="Page_Title">Text Analyzer</h1>
+    <textarea id="inputText" placeholder="Paste or type words here..." data-label="Textarea_Input"></textarea>
+    <br>
+    <button onclick="analyzeText()" data-label="Button_Analyze">Analyze</button>
+
+    <div class="results" id="results" data-label="Results_Container"></div>
+  </div>
+
+  <script>
+    const pronouns = ["he", "she", "it", "they", "we", "i", "you", "him", "her", "them", "us", "me", "my", "your", "their", "his", "its", "our"];
+    const prepositions = ["in", "on", "at", "by", "with", "about", "against", "between", "into", "through", "during", "before", "after", "above", "below", "to", "from", "up", "down"];
+    const articles = ["a", "an", "the"];
+
+    function analyzeText() {
+      const text = document.getElementById("inputText").value;
+
+      const words = text.toLowerCase().match(/\b\w+\b/g) || [];
+      const letters = (text.match(/[a-zA-Z]/g) || []).length;
+      const spaces = (text.match(/ /g) || []).length;
+      const newlines = (text.match(/\n/g) || []).length;
+      const specialSymbols = (text.match(/[^a-zA-Z0-9\s]/g) || []).length;
+
+      const countOccurrences = (list) => {
+        return list.reduce((acc, word) => {
+          acc[word] = words.filter(w => w === word).length;
+          return acc;
+        }, {});
+      };
+
+      const buildListHTML = (label, counts) => {
+        const total = Object.values(counts).reduce((a, b) => a + b, 0);
+        let html = `<h2>${label} (Total: ${total})</h2><div class="word-boxes">`;
+        for (const word in counts) {
+          if (counts[word] > 0) {
+            html += `<div><strong>${word}</strong>: ${counts[word]}</div>`;
+          }
+        }
+        html += '</div>';
+        return html;
+      };
+
+      const pronounCounts = countOccurrences(pronouns);
+      const prepositionCounts = countOccurrences(prepositions);
+      const articleCounts = countOccurrences(articles);
+
+      const output = `
+        <h2>Basic Stats:</h2>
+        <div>Letters: <strong>${letters}</strong></div>
+        <div>Words: <strong>${words.length}</strong></div>
+        <div>Spaces: <strong>${spaces}</strong></div>
+        <div>Newlines: <strong>${newlines}</strong></div>
+        <div>Special Symbols: <strong>${specialSymbols}</strong></div>
+        <hr>
+        ${buildListHTML("Pronouns", pronounCounts)}
+        <hr>
+        ${buildListHTML("Prepositions", prepositionCounts)}
+        <hr>
+        ${buildListHTML("Articles", articleCounts)}
+      `;
+
+      document.getElementById("results").innerHTML = output;
+    }
+  </script>
+  <script src="analytics.js" data-label="Script_Analytics"></script>
+</body>
+</html>
